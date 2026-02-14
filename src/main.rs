@@ -2,6 +2,7 @@
 //  Deadbolt - Post-Quantum File Encryption
 //  Supports both CLI and GUI modes
 // ═══════════════════════════════════════════════════════════
+
 #![cfg_attr(target_os = "windows", windows_subsystem = "windows")]
 
 mod crypto;
@@ -89,7 +90,6 @@ fn main() -> Result<()> {
         }
         None => {
             // Default behavior: Launch GUI when no command is specified
-            println!("🚀 Launching Deadbolt GUI...");
             return gui::run_gui().map_err(|e| anyhow::anyhow!("GUI error: {}", e));
         }
     }
@@ -267,4 +267,3 @@ fn cmd_unlock(file_path: PathBuf, privkey_path: PathBuf, output: Option<PathBuf>
     
     Ok(())
 }
-
